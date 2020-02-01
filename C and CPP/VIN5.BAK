@@ -1,0 +1,41 @@
+#include<stdio.h>
+#define max 10
+#include<ctype.h>
+void push(int);
+int arr[max];int top=-1;int a=0,b=0,z=0;
+void main()
+{
+char ch[100];       int c;
+int i=0;
+clrscr();
+printf("entrr expression");
+scanf("%s",ch);
+while(ch[i]!='\0')
+{
+	c=ch[i];
+	if(c>=0 && c<=9)
+	{
+		push(c);
+	}
+	else
+	{
+		a=pop();
+		b=pop();
+	}
+	i++;
+}
+z=(int)a+(int)b;
+printf("the addition is %d",z);
+getch();
+}
+void push(int c)
+{
+top++;
+arr[top]=c   ;
+}
+int pop()
+{
+int h=arr[top];
+top--;
+return h;
+}

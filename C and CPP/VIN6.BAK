@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+#include<string.h>
+typedef struct employee
+{
+	int eno;
+	char *ename;
+	struct employee *next;
+}node;
+node *start=NULL,*ne,*last;
+
+void creation()
+{  char ch;
+    do
+     {
+     //	printf("create a new node");
+	ne=(node*)malloc(sizeof(node));
+	if(ne==NULL)
+	{
+		printf("memory is not allocated");
+		getch();
+		exit(0);
+	}
+	printf("\nenter the details");
+	scanf("%d%s",&ne->eno,ne->ename);
+	ne->next=NULL;
+	if(start==NULL)
+		start=ne;
+	else
+	       last->next=ne;
+	       last=ne;
+	printf("do u want to create one mre record  (y/n)");
+	fflush(stdin);
+	scanf("%c",&ch);
+     }while(ch=='Y' || ch=='y');
+}
+void display()
+{
+	node *temp;
+	temp=start;
+	while(temp->next!=NULL)
+	{
+		printf("\neno=%d    ename=%s",temp->eno,temp->ename);
+		temp=temp->next;
+	}
+}
+void insertion()
+{
+	node *temp,*s;      int pos, i,k;
+	temp=start;
+	printf("\nenter the details for isertion node");
+	s=(node*)malloc(sizeof(node));
+	scanf("%d%s",&s->eno,s->ename);
+	s->next=NULL;
+	printf("enter \n 1-insertfirst\n 2-insert middle\n3-insertlast");
+	scanf("%d",&k);
+	switch(k)
+	{
+		case 1: s->next=temp;
+			start=s;
+			break;
+		case 2: printf("\n enter u r position");
+			scanf("%d",&pos);
+			for(i=1;i<pos-1;i++)
+				temp=temp->next;
+			s->next=(temp->next);
+				temp->next=s;
+			break;
+		case 3: while(temp->next!=NULL)
+			{
+				temp=temp->next;
+			}
+			temp->next=s;
+			break;
+	}
+}
+void main()
+{
+  clrscr();
+  creation();
+  display();
+  insertion();
+  display();
+  getch();
+}
